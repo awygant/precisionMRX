@@ -3,123 +3,133 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <!-- Nanoparticle Hover Graphic -->
+    <script src = "http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style type = "text/css">
+        #layersContainer{
+            width:100%;
+            max-width:315px;
+            display:inline-block;
+            vertical-align: middle;
+        }
+        #layersContainer div{
+            position:absolute;
+            top:0;
+            left:0;
+            -webkit-transition: opacity 0.3s;
+            -moz-transition: opacity 0.3s;
+            transition: opacity 0.3s;
+        }
+        #core{
+            z-index:1;
+            position:relative !important;
+        }
+        #polymer{
+            z-index:2;
+        }
+        #stealth{
+            z-index:3;
+        }
+        #antibodies{
+            z-index:4;
+        }
+        #layersContainer img{
+            max-width:100%;
+            width:315px;
+        }
+        .layersHandles{
+            font-family:'Arial', sans-serif;
+            display:inline-block;
+            vertical-align: middle;
+            max-width:360px;
+        }
+        .layersHandles div{
+            min-height:70px;
+            padding:10px;
+            width:100%;
+        }
+        .layersHandles div p{
+            display:none;
+            margin:0;
+            font-size:10pt;
+            line-height:12pt;
+        }
 
-    <script src = "js/jquery-1.11.3.min.js"></script>
+        @media(max-width:960px){
+            .layersHandles{
+                width:100%;
+                max-width:none;
+            }
+            #layersContainer{
+                max-width:none;
+            }
+        }
+    </style>
+    <script type = "text/javascript">
+        $(document).ready(function(){
+            var layers = $("#layersContainer div");
+            var handles = $(".layersHandles div");
+            handles.click(function(){
+                reveal($(this));
+            });
+            handles.hover(function(){
+                reveal($(this));
+            });
+
+            function reveal(handle){
+                layers.css("opacity", "0.1");
+                layers.css("z-index", "auto");
+                targetLayer = $("#" + handle.data("handle"));
+                targetLayer.css("opacity", "1");
+                targetLayer.css("z-index", "5");
+                handles.find('p').hide();
+                handle.find('p').show();
+            }
+
+            reveal($("#coreHandle"));
+
+        });
+    </script>
 </head>
 <body>
 
-<script type = "text/javascript">
-    $(document).ready(function(){
-        var layers = $("#layersContainer div");
-        var handles = $(".layersHandles div");
-        handles.click(function(){
-            reveal($(this));
-        });
-        handles.hover(function(){
-            reveal($(this));
-        });
 
-        function reveal(handle){
-            layers.css("visibility", "hidden");
-            targetLayer = $("#" + handle.data("handle"));
-            targetLayer.css("visibility", "visible");
-            handles.find('p').hide();
-            handle.find('p').show();
-        }
-
-    });
-</script>
-
-<style type = "text/css">
-    #layersContainer{
-        width:100%;
-        max-width:550px;
-        display:inline-block;
-        vertical-align: middle;
-    }
-    #layersContainer div{
-        position:absolute;
-        top:0;
-        left:0;
-    }
-    #core{
-        z-index:1;
-        position:relative !important;
-    }
-    #polymer{
-        z-index:2;
-    }
-    #stealth{
-        z-index:3;
-    }
-    #antibodies{
-        z-index:4;
-    }
-    #layersContainer img{
-        max-width:100%;
-    }
-    .layersHandles{
-        font-family:'Arial', sans-serif;
-        display:inline-block;
-        vertical-align: middle;
-        max-width:410px;
-    }
-    .layersHandles div{
-        height:50px;
-        padding:10px;
-        width:100%;
-    }
-    .layersHandles div p{
-        display:none;
-        margin:0;
-    }
-
-    @media(max-width:960px){
-        .layersHandles{
-            width:100%;
-            max-width:none;
-        }
-        #layersContainer{
-            max-width:none;
-        }
-    }
-
-</style>
 <h2>PrecisionMRX Superparmagnetic Nanoparticle Structure</h2>
+<p>Mouse over or click on each component label to learn more.</p>
 <div style = "position:relative">
     <div id = "layersContainer">
         <div id = "core">
-            <img src = "img/optimized/core.png"/>
+            <img src = "http://precisionmrx.com/wp-content/uploads/2015/10/core.png"/>
         </div>
         <div id = "polymer">
-            <img src = "img/optimized/polymer.png"/>
+            <img src = "http://precisionmrx.com/wp-content/uploads/2015/10/polymer.png"/>
         </div>
         <div id = "stealth">
-            <img src = "img/optimized/stealth.png"/>
+            <img src = "http://precisionmrx.com/wp-content/uploads/2015/10/stealth.png"/>
         </div>
         <div id = "antibodies">
-            <img src = "img/optimized/antibodies.png"/>
+            <img src = "http://precisionmrx.com/wp-content/uploads/2015/10/antibodies.png"/>
         </div>
     </div>
 
     <div class = "layersHandles">
-        <p>Mouse over or click on each component label to learn more.</p>
-        <div id = "antibodiesHandle" data-handle = "antibodies">
-            <strong>Antibody layer</strong>
-            <p>Add some info about the Antibodies layer here.</p>
-        </div>
-        <div id = "stealthHandle" data-handle = "stealth">
-            <strong>Stealth protection layer</strong>
-            <p>Add some info about the Stealth layer here.</p>
+        <div id = "coreHandle" data-handle = "core">
+            <strong>Magnetite Nanoparticle Core</strong>
+            <p>Uniformly Sized Superparamagnetic Fe<sub>3</sub>O<sub>4</sub>.</p>
         </div>
         <div id = "polymerHandle" data-handle = "polymer">
-            <strong>Custom polymer protective coating</strong>
-            <p>Add some info about the Polymer layer here.</p>
+            <strong>Protective Polymer Coating</strong>
+            <p>Monolayer provides stability in aqueous suspensions.</p>
         </div>
-        <div id = "coreHandle" data-handle = "core">
-            <strong>PrecisionMRX magnetite nanoparticle core</strong>
-            <p>Add some info about the Core layer here.</p>
+        <div id = "stealthHandle" data-handle = "stealth">
+            <strong>Stealth Coating – PolyEthylene Glycol</strong>
+            <p>Minimizes opsonization in biological applications.</p>
         </div>
+        <div id = "antibodiesHandle" data-handle = "antibodies">
+            <strong>Antibody Conjugates</strong>
+            <p>Provides molecular specificity for targeting cells.</p>
+        </div>
+
     </div>
 
 </div>
